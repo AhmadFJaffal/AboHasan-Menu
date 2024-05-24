@@ -1,0 +1,91 @@
+/* AddMenuItemForm.css */
+.search-container {
+  display: flex;
+  flex-direction: column; /* Change to column layout for better mobile response */
+  gap: 10px;
+  padding: 10px;
+  margin-bottom: 80px;
+  margin-top: 80px;
+}
+
+.search-input,
+.select-dropdown,
+.price-input,
+.update-price-btn {
+  width: 100%; /* Full width to utilize available space */
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.update-price-btn {
+  background-color: #f2b05c;
+  color: white;
+  cursor: pointer;
+}
+
+.update-price-btn:hover {
+  background-color: #e1a54a;
+}
+
+@media screen and (min-width: 768px) {
+  .search-container {
+    flex-direction: row; /* Row layout for wider screens */
+    align-items: center; /* Align items in the center vertically */
+    justify-content: space-between; /* Space out elements */
+  }
+
+  .price-input,
+  .update-price-btn {
+    width: auto; /* Auto width for elements, adjust as necessary */
+    flex-grow: 1; /* Allow flexible growth to fill space */
+  }
+
+  .select-dropdown {
+    flex-grow: 2; /* Give more space to dropdown */
+  }
+}
+
+/* Form styling */
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%; /* Ensure max-width does not exceed the viewport */
+  margin: 20px auto;
+  padding: 20px;
+  padding-bottom: 60px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.textArea,
+textarea,
+button {
+  width: 100%; /* Ensure full width */
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
+textarea {
+  height: 100px;
+  resize: vertical; /* Allow vertical resize only */
+}
+
+button {
+  background-color: #5c67f2;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #4a54e1;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #4a54e1; /* Focus style */
+}

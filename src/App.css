@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+.header {
+  width: 100%; /* Full width */
+  overflow: hidden; /* In case the image is still overflowing */
+}
+
+main,
+.header {
+  width: 100%; /* Ensure full width */
+}
+
+.full-img {
+  width: 100%;
+  object-fit: contain; /* Adjust based on your aesthetic needs */
+  display: block;
+  background-size: contain;
+}
+@media (max-width: 768px) {
+  .header {
+    width: 100%;
+    overflow: hidden;
+  }
+  main,
+  .header {
+    width: 100%;
+  }
+  .full-img {
+    width: 500px;
+    object-fit: cover;
+    display: block;
+    background-size: contain;
+    margin-right: 0;
+    padding-right: 0;
+  }
+}
