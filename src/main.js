@@ -2,39 +2,41 @@ import React, { useState, useEffect } from "react";
 import Menu from "./Menu";
 import Categories from "./Categories";
 import { db } from "./firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import bgHero from "./img/bg-hero.jpg";
 import "./App.css";
 import StickyFooter from "./components/footer";
 
 function MainPage() {
-  const [menuItems, setMenuItems] = useState([]);  // Will be used to display items
-  const [allItems, setAllItems] = useState([]);    // Will store all items
+  const [menuItems, setMenuItems] = useState([]);
+  const [allItems, setAllItems] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [activeCategory, setActiveCategory] = useState("ترويقة"); // Set default active category to "ترويقة"
 
   useEffect(() => {
     const fetchData = async () => {
       const menuCollection = collection(db, "menuItems");
-      const menuSnapshot = await getDocs(menuCollection);
+      const q = query(menuCollection, orderBy("id"));
+  
+      const menuSnapshot = await getDocs(q);
       const itemsArray = menuSnapshot.docs.map(doc => ({
-        id: doc.id,
+        docId: doc.id,
         ...doc.data(),
       }));
-      setMenuItems(itemsArray);
-      setAllItems(itemsArray);  // Set allItems to the full fetched list
-      setCategories(["all", ...new Set(itemsArray.map(item => item.category))]);
+  
+      const uniqueCategories = [...new Set(itemsArray.map(item => item.category))];
+      setMenuItems(itemsArray.filter(item => item.category === "ترويقة")); // Initially filter by "ترويقة"
+      setAllItems(itemsArray);
+      setCategories(uniqueCategories);
     };
 
     fetchData();
   }, []);
 
   const filterItems = (category) => {
-    if (category === "all") {
-      setMenuItems(allItems);  // Reset to all items when 'all' is clicked
-    } else {
-      const filteredItems = allItems.filter(item => item.category === category);  // Always filter from allItems
-      setMenuItems(filteredItems);
-    }
+    const filteredItems = allItems.filter(item => item.category === category);
+    setMenuItems(filteredItems);
+    setActiveCategory(category); // Update the active category
   };
 
   return (
@@ -48,10 +50,10 @@ function MainPage() {
             <h2>قائمة الطعام</h2>
             <div className="underline" />
           </div>
-          <Categories categories={categories} filterItems={filterItems} />
+          <Categories categories={categories} filterItems={filterItems} activeCategory={activeCategory} />
           <Menu items={menuItems} />
         </section>
-        <StickyFooter/>
+        <StickyFooter />
       </main>
     </>
   );
