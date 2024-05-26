@@ -7,6 +7,7 @@ import {
   getHighestId,
 } from "./AddItem_utils";
 import "../../css/AddItem.css";
+import { addCreatedAtField,addKiloPriceToGrillItems } from "../UploadMenuData";
 import { doc, updateDoc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
@@ -165,6 +166,9 @@ function AddMenuItemForm() {
         />
         <button type="submit">Add Menu Item</button>
       </form>
+      {/* <button type="button" onClick={addKiloPriceToGrillItems}>
+        Add dates
+      </button> */}
     </>
   );
 }

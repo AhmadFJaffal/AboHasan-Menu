@@ -16,7 +16,8 @@ function MainPage() {
   useEffect(() => {
     const fetchData = async () => {
       const menuCollection = collection(db, "menuItems");
-      const q = query(menuCollection, orderBy("id"));
+      // Order items by the 'createdAt' field
+      const q = query(menuCollection, orderBy("createdAt"));
   
       const menuSnapshot = await getDocs(q);
       const itemsArray = menuSnapshot.docs.map(doc => ({
@@ -25,13 +26,15 @@ function MainPage() {
       }));
   
       const uniqueCategories = [...new Set(itemsArray.map(item => item.category))];
-      setMenuItems(itemsArray.filter(item => item.category === "ترويقة")); // Initially filter by "ترويقة"
-      setAllItems(itemsArray);
-      setCategories(uniqueCategories);
+      // Set the initial display of items filtered by the category "ترويقة"
+      setMenuItems(itemsArray.filter(item => item.category === "ترويقة"));
+      setAllItems(itemsArray);  // Store all items for potential other filtering
+      setCategories(uniqueCategories);  // Set categories from fetched items
     };
-
+  
     fetchData();
   }, []);
+  
 
   const filterItems = (category) => {
     const filteredItems = allItems.filter(item => item.category === category);
