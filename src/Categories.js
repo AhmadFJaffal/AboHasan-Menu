@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaCoffee,
   FaLeaf,
@@ -36,19 +36,15 @@ const categoryIcons = {
   مشاوي: <GiBarbecue />,
   سندويش: <GiSandwich />,
   "لحمة نية": <GiMeat />,
-  مرطبات: <GiBottleCap />,
+  " مرطبات": <GiBottleCap />,
 };
 
 // Categories component
 const Categories = ({ categories, filterItems, activeCategory }) => {
   const [currentCategory, setCurrentCategory] = useState(0);
 
-  const normalizedCategories = categories.map((category) =>
-    category.trim().normalize()
-  );
-
   // Order categories according to predefined list
-  const orderedCategories = normalizedCategories.sort((a, b) => {
+  const orderedCategories = categories.sort((a, b) => {
     const indexA = categoryOrder.indexOf(a);
     const indexB = categoryOrder.indexOf(b);
     if (indexA === -1 && indexB === -1) return 0;
