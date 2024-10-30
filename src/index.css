@@ -3,7 +3,6 @@
 Variables
 ===============
 */
-@import url("https://fonts.googleapis.com/css2?family=Amiri&display=swap");
 
 :root {
   /* dark shades of primary color*/
@@ -61,9 +60,10 @@ Global Styles
   box-sizing: border-box;
 }
 body {
-  font-family: "Amiri", serif;
+  font-family: "Amiri", "Droid Arabic Kufi", "Noto Sans Arabic", "Cairo", serif !important;
   color: var(--clr-grey-1);
-  line-height: 1.5;
+  line-height: 1.6 !important;
+  letter-spacing: 0 !important;
   font-size: 0.875rem;
 }
 ul {
@@ -110,9 +110,6 @@ p {
   h4 {
     font-size: 1rem;
   }
-  body {
-    font-size: 1rem;
-  }
   h1,
   h2,
   h3,
@@ -124,9 +121,7 @@ p {
 
 /* section */
 .section {
-  width: 90vw;
-  margin: 0 auto;
-  max-width: var(--max-width);
+  width: 100%;
 }
 
 @media screen and (min-width: 992px) {
@@ -149,7 +144,7 @@ Menu
   margin-bottom: 2rem;
 }
 .underline {
-  width: 5rem;
+  width: 12rem;
   height: 0.25rem;
   background: var(--clr-gold);
   margin-left: auto;
@@ -162,7 +157,6 @@ Menu
   margin: 0 auto 3rem auto; /* Added bottom margin */
   padding: 1rem 0; /* Space above and below the container */
   border-bottom: 2px solid var(--clr-gold); /* Add a gold colored bottom border */
-
 }
 
 .filter-btn {
@@ -184,7 +178,6 @@ Menu
   background: var(--clr-gold); /* Gold background for active/hover */
   color: var(--clr-white); /* White text on active/hover */
 }
-
 
 .section-center {
   width: 90vw; /* Responsive width */

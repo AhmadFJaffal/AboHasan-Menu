@@ -18,26 +18,27 @@ function MainPage() {
       const menuCollection = collection(db, "menuItems");
       // Order items by the 'createdAt' field
       const q = query(menuCollection, orderBy("createdAt"));
-  
+
       const menuSnapshot = await getDocs(q);
-      const itemsArray = menuSnapshot.docs.map(doc => ({
+      const itemsArray = menuSnapshot.docs.map((doc) => ({
         docId: doc.id,
         ...doc.data(),
       }));
-  
-      const uniqueCategories = [...new Set(itemsArray.map(item => item.category))];
+
+      const uniqueCategories = [
+        ...new Set(itemsArray.map((item) => item.category)),
+      ];
       // Set the initial display of items filtered by the category "ترويقة"
-      setMenuItems(itemsArray.filter(item => item.category === "ترويقة"));
-      setAllItems(itemsArray);  // Store all items for potential other filtering
-      setCategories(uniqueCategories);  // Set categories from fetched items
+      setMenuItems(itemsArray.filter((item) => item.category === "ترويقة"));
+      setAllItems(itemsArray); // Store all items for potential other filtering
+      setCategories(uniqueCategories); // Set categories from fetched items
     };
-  
+
     fetchData();
   }, []);
-  
 
   const filterItems = (category) => {
-    const filteredItems = allItems.filter(item => item.category === category);
+    const filteredItems = allItems.filter((item) => item.category === category);
     setMenuItems(filteredItems);
     setActiveCategory(category); // Update the active category
   };
@@ -53,7 +54,11 @@ function MainPage() {
             <h2>قائمة الطعام</h2>
             <div className="underline" />
           </div>
-          <Categories categories={categories} filterItems={filterItems} activeCategory={activeCategory} />
+          <Categories
+            categories={categories}
+            filterItems={filterItems}
+            activeCategory={activeCategory}
+          />
           <Menu items={menuItems} />
         </section>
         <StickyFooter />

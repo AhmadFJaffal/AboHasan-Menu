@@ -1,5 +1,20 @@
-// Categories.js
 import React, { useState } from "react";
+import {
+  FaCoffee,
+  FaLeaf,
+  FaUtensils,
+  FaFire,
+  FaDrumstickBite,
+  FaHamburger,
+  FaFish,
+  FaIceCream,
+} from "react-icons/fa";
+import "./css/navbar.css";
+import { GiHotMeal } from "react-icons/gi";
+import { GiBarbecue } from "react-icons/gi";
+import { GiMeat } from "react-icons/gi";
+import { GiBottleCap } from "react-icons/gi";
+import { GiSandwich } from "react-icons/gi";
 
 const categoryOrder = [
   "ترويقة",
@@ -12,21 +27,33 @@ const categoryOrder = [
   "مرطبات",
 ];
 
+// Icon mapping for each category
+const categoryIcons = {
+  ترويقة: <FaCoffee />,
+  سلطات: <FaLeaf />,
+  مقبلات: <FaUtensils />,
+  "وجبات ساخنة": <GiHotMeal />,
+  مشاوي: <GiBarbecue />,
+  سندويش: <GiSandwich />,
+  "لحمة نية": <GiMeat />,
+  مرطبات: <GiBottleCap />,
+};
+
 // Categories component
-const Categories = ({ categories, filterItems,activeCategory  }) => {
+const Categories = ({ categories, filterItems, activeCategory }) => {
   const [currentCategory, setCurrentCategory] = useState(0);
 
+  const normalizedCategories = categories.map((category) =>
+    category.trim().normalize()
+  );
+
   // Order categories according to predefined list
-  const orderedCategories = categories.sort((a, b) => {
-    // Find indexes of both categories in the ordering array
+  const orderedCategories = normalizedCategories.sort((a, b) => {
     const indexA = categoryOrder.indexOf(a);
     const indexB = categoryOrder.indexOf(b);
-
-    // Handle cases where categories may not be in the order list
-    if (indexA === -1 && indexB === -1) return 0; // both categories are not in the list, keep their relative order
-    if (indexA === -1) return 1; // category a is not in the list, sort it to end
-    if (indexB === -1) return -1; // category b is not in the list, sort it to end
-
+    if (indexA === -1 && indexB === -1) return 0;
+    if (indexA === -1) return 1;
+    if (indexB === -1) return -1;
     return indexA - indexB;
   });
 
@@ -36,16 +63,19 @@ const Categories = ({ categories, filterItems,activeCategory  }) => {
   };
 
   return (
-    <div className="btn-container">
+    <div className="afj-btn-container">
       {orderedCategories.map((category, index) => {
         return (
           <button
             type="button"
-            className={`filter-btn ${category === activeCategory ? "active" : ""}`}
+            className={`afj-filter-btn ${
+              category === activeCategory ? "afj-active" : ""
+            }`}
             key={index}
             onClick={() => handleCategoryClick(index, category)}
           >
-            {category}
+            {categoryIcons[category]} {/* Display corresponding icon */}
+            <span>{category}</span> {/* Display category name */}
           </button>
         );
       })}
