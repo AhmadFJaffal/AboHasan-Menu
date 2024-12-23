@@ -60,7 +60,7 @@ export default function StickyFooter() {
             </Typography>
 
             <Link
-              href="https://maps.app.goo.gl/NsipfTu3ahphmKyC9"
+              href="https://maps.app.goo.gl/toDW5WJbTzyTAR65A?g_st=com.google.maps.preview.copy"
               target="_blank"
               sx={{ mt: 2 }}
             >
